@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.geometry.Insets?>
+
+<ScrollPane
+	pannable="true"
+	xmlns="http://javafx.com/javafx/8.0.171" 
+	xmlns:fx="http://javafx.com/fxml/1" 
+	fx:controller="br.com.fatec.pharmacom.supplier.controller.SupplierController"
+	prefWidth="400" prefHeight="300" fitToWidth="true" vbarPolicy="AS_NEEDED"
+>
+<Region HBox.hgrow="ALWAYS"/>
+<VBox
+	spacing="20.0" 
+>	
+   <children>
+	 <Region HBox.hgrow="ALWAYS"/>
+  	  <VBox alignment="TOP_CENTER" >
+	      <Label text="Gerenciamento de fornecedores" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+	  </VBox>
+	  <VBox 
+		alignment="TOP_LEFT" 
+		spacing="20.0"
+		>
+		<VBox spacing="8.0">
+			<Label text="Razão social *"/>
+		  	<TextField 
+		  		fx:id="inputLegalName"
+		  		styleClass="product-management-input"
+		  		promptText="Digite a razao social do fornecedor"
+		  	/>
+		</VBox>
+		<VBox spacing="8.0">
+			<Label text="Nome Fantasia *"/>
+		  	<TextField 
+		  		fx:id="inputTradeName"
+				styleClass="product-management-input"
+				promptText="Digite o nome fantasia do fornecedor"	
+			/>
+		</VBox>
+		<VBox spacing="8.0">
+			<Label text="CNPJ *"/>
+		  	<TextField 
+		  		fx:id="inputCnpj"
+		  		styleClass="product-management-input"
+		  		promptText="Digite o CNPJ do fornecedor"
+		  	/>
+		</VBox>
+		<VBox spacing="8.0">
+			<Label  text="Telefone *"/>
+		  	<TextField 
+		  		fx:id="inputPhone"
+				styleClass="product-management-input"
+				promptText="Digite o telefone do fornecedor"			/>
+		</VBox>
+		<VBox spacing="8.0">
+			<Label  text="Email *"/>
+		  	<TextField 
+		  		fx:id="inputEmail"
+		  		styleClass="product-management-input"
+				promptText="Digite o email do fornecedor"			/>
+		</VBox>
+		<VBox spacing="8.0">
+			<Label  text="Site (opcional)"/>
+		  	<TextField 
+		  		fx:id="inputWebSite"
+		  		styleClass="product-management-input"
+				promptText="Digite o site do fornecedor"			/>
+		</VBox>
+		  
+	  	<Button 
+	  		text="Salvar Fornecedor" 
+		  	styleClass="btn-router-selector"
+			fx:id="btnSave"  onAction="#saveSupplier"
+         />
+	  </VBox>
+	  <Region HBox.hgrow="ALWAYS"/>
+   </children>
+	<padding>
+      <Insets left="20.0" right="20.0"/>
+   </padding>
+</VBox>
+
+</ScrollPane>

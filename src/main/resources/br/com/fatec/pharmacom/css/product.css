@@ -1,0 +1,8 @@
+.product-management-input {
+    -fx-border-color: #ccc; 
+    -fx-background-color: white;
+}
+.product-management-input:focused {
+    -fx-border-color: #ccc;
+    -fx-background-color: white;
+}

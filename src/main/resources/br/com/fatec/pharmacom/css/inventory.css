@@ -1,0 +1,11 @@
+.header{
+	-fx-text-fill: #FF5B57;
+	-fx-background-color: #FF5B57;
+	-fx-padding: 10;
+}
+
+.btn-navigation{
+	-fx-background-color: transparent;
+	-fx-focus-color: transparent;
+	-fx-text-fill: #FFFFFF;
+}

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.geometry.Insets?>
+
+<VBox 
+	spacing="20.0" 
+	xmlns="http://javafx.com/javafx/8.0.171" 
+	xmlns:fx="http://javafx.com/fxml/1" 
+	fx:controller="br.com.fatec.pharmacom.customer.controller.CustomerController"
+	>
+
+   <children>
+   <Region HBox.hgrow="ALWAYS"/>
+  	  <VBox alignment="TOP_CENTER" >
+	      <Label text="Gerenciamento de clientes" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+	  </VBox>
+	  <VBox 
+		alignment="TOP_LEFT" 
+		spacing="20.0"
+		>
+		<VBox spacing="8.0">
+			<Label text="Nome completo"/>
+		  	<TextField styleClass="product-management-input"/>
+		</VBox>
+		<VBox spacing="8.0">
+			<Label text="CPF"/>
+		  	<TextField styleClass="product-management-input"/>
+		</VBox>
+		<VBox spacing="8.0">
+			<Label  text="Telefone"/>
+		  	<TextField styleClass="product-management-input"/>
+		</VBox>
+		<VBox spacing="8.0">
+			<Label  text="Data de Nascimento"/>
+		  	<TextField styleClass="product-management-input"/>
+		</VBox>
+	  	<Button text="Salvar Cliente" 
+		  	styleClass="btn-router-selector"
+			fx:id="btnSave"  onAction="#saveCustomer"
+         />
+	  </VBox>
+	   <Region HBox.hgrow="ALWAYS"/>
+   </children>
+	<padding>
+      <Insets left="20.0" right="20.0"/>
+   </padding>
+
+</VBox>

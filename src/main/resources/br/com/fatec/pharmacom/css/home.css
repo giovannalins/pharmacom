@@ -1,0 +1,9 @@
+.btn-router-selector{
+   -fx-background-color: #FF5B57;
+   -fx-border-color: transparent transparent #626262 transparent;
+   -fx-border-width: 0 0 0.2 0;
+   -fx-border-radius: 0;
+   -fx-background-radius: 0 0 1px 0;
+   -fx-focus-color: transparent;
+   -fx-faint-focus-color: #ffffff;
+}
