@@ -16,12 +16,10 @@ public class ConfigManager {
         try {
             Parameters params = new Parameters();
             config = new CombinedConfiguration();
-            
-            // 1. Environment variables (highest priority)
             config.addConfiguration(new EnvironmentConfiguration());
             
             // 2. External config file (medium priority)
-            File propertiesFile = new File("config.properties");
+            File propertiesFile = new File("/Users/JP/eclipse-workspace/pharmacom/src/main/resources/default.properties");
             if (propertiesFile.exists()) {
                 config.addConfiguration(
                     new FileBasedConfigurationBuilder<>(PropertiesConfiguration.class)
@@ -34,7 +32,7 @@ public class ConfigManager {
             config.addConfiguration(
                 new FileBasedConfigurationBuilder<>(PropertiesConfiguration.class)
                     .configure(params.fileBased().setURL(
-                        ConfigManager.class.getResource("/default.properties")))
+                        ConfigManager.class.getResource("application.properties")))
                     .getConfiguration()
             );
             

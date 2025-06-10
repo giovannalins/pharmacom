@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Pagination?>
+<?import javafx.scene.layout.VBox?>
 
-
-<ListView fx:id="listViewProdutos"/>
+<!-- Add xmlns:fx="http://javafx.com/fxml" to your root element -->
+<VBox xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml"
+      spacing="10"
+      fx:controller="br.com.fatec.pharmacom.product.controller.ProductsListController"
+      >
+    <ListView fx:id="listViewProducts" VBox.vgrow="ALWAYS"/>
+    <Pagination fx:id="pagination" 
+                style="-fx-page-information-visible: true;"
+                maxPageIndicatorCount="5"/>
+</VBox>

@@ -1,13 +1,18 @@
 package br.com.fatec.pharmacom.config;
 
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
+import org.hibernate.jpa.HibernatePersistenceProvider;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
+
+import br.com.fatec.pharmacom.App;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 
 public class JpaManager {
     private static EntityManagerFactory emf;
@@ -20,10 +25,21 @@ public class JpaManager {
         
         // Configure HikariCP
         HikariConfig hikariConfig = new HikariConfig();
-        hikariConfig.setJdbcUrl(ConfigManager.getString("db.url"));
-        hikariConfig.setUsername(ConfigManager.getString("db.user"));
-        hikariConfig.setPassword(ConfigManager.getString("db.password"));
-        hikariConfig.setMaximumPoolSize(ConfigManager.getInt("db.pool.size", 10));
+//        var db_url = ConfigManager.getString("db.url");
+//        var db_url = "jdbc:postgresql://localhost:5432/pharmacom";
+//        var db_user = "postgres";
+//        var db_password = "JjpHack@01";
+//        var driver = "org.postgresql.Driver";
+        var db_url = "jdbc:h2:mem:pharmacom;DB_CLOSE_DELAY=-1";
+        var db_user = "sa";
+        var db_password = "";
+        var driver = "org.h2.Driver";
+        var db_pool = 5;
+        hikariConfig.setJdbcUrl(db_url);
+        hikariConfig.setUsername(db_user);
+        hikariConfig.setPassword(db_password);
+        hikariConfig.setMaximumPoolSize(db_pool);
+        hikariConfig.setDriverClassName(driver);
         hikariConfig.setConnectionTimeout(30000);
         hikariConfig.setIdleTimeout(600000);
         hikariConfig.setMaxLifetime(1800000);
@@ -31,22 +47,23 @@ public class JpaManager {
         dataSource = new HikariDataSource(hikariConfig);
         
         // Hibernate properties
-        Map<String, Object> properties = Map.of(
-            "jakarta.persistence.nonJtaDataSource", dataSource,
-            "hibernate.hikari.dataSource", dataSource,
-            "hibernate.dialect", ConfigManager.getString("hibernate.dialect"),
-            "hibernate.hbm2ddl.auto", ConfigManager.getString("hibernate.ddl", "validate"),
-            "hibernate.show_sql", ConfigManager.getBoolean("hibernate.show_sql", false),
-            "hibernate.format_sql", true
-        );
+        Map<String, Object> props = new HashMap<>();
+        props.put("jakarta.persistence.nonJtaDataSource", dataSource);
+        props.put("hibernate.hbm2ddl.auto", "update");
+        props.put("hibernate.show_sql", true);
+        props.put("hibernate.format_sql", true);
+//        props.put("database-platform", "org.hibernate.dialect.PostgreSQLDialect");
+        props.put("hibernate.h2.console.enable", "true");
+        props.put("hibernate.h2.console.port", "8082");
+        props.put("hibernate.h2.console.path", "/h2-console");
+        props.put("hibernate.archive.autodetection", "class,hbm");
+        props.put("jakarta.persistence.sql-load-script-source", "META-INF/import.sql");
         
-        emf = Persistence.createEntityManagerFactory("yourPersistenceUnit", properties);
         
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            dbExecutor.shutdown();
-            if (emf != null) emf.close();
-            if (dataSource != null) dataSource.close();
-        }));
+        emf = new HibernatePersistenceProvider()
+                .createEntityManagerFactory("pharmacom", props);
+        
+        Runtime.getRuntime().addShutdownHook(new Thread(JpaManager::shutdown));
     }
     
     public static EntityManager getEntityManager() {
@@ -77,3 +94,6 @@ public class JpaManager {
         dbExecutor.shutdown();
     }
 }
+
+
+

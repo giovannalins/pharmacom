@@ -1,31 +1,47 @@
 package br.com.fatec.pharmacom.product.model;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="TBL_PRODUCT")
 public class ProductModel{
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.UUID)
+    @Column(columnDefinition = "uuid", updatable = false)
 	private UUID id;
 	private String name;
 	private String description;
-	private BigDecimal unitValue;
-	private Date updatedAt;
-	private Date createdAt;
+	private BigDecimal price;
+	@Column(updatable = false)
+	private LocalDateTime updatedAt;
+	private LocalDateTime createdAt;
 	private Boolean isActive;
+	private String imageUrl;
 	
-	public ProductModel(String name, String description, BigDecimal unitValue, Date updatedAt, Date createdAt, Boolean isActive) {
+	public ProductModel(String name, String description, BigDecimal price, LocalDateTime updatedAt, LocalDateTime createdAt, Boolean isActive) {
 		this.name = name;
 		this.description = description;
-		this.unitValue = unitValue;
+		this.price = price;
 		this.updatedAt = updatedAt;
 		this.createdAt = createdAt;
 		this.setIsActive(isActive);
 	}
 	
-	public ProductModel(String name, String description, BigDecimal unitValue, Date updatedAt, Boolean isActive) {
+	public ProductModel(String name, String description, BigDecimal price, LocalDateTime updatedAt, Boolean isActive) {
 		this.name = name;
 		this.description = description;
-		this.unitValue = unitValue;
+		this.price = price;
 		this.updatedAt = updatedAt;
 		this.setIsActive(isActive);
 	}
@@ -58,23 +74,23 @@ public class ProductModel{
 		this.description = description;
 	}
 	
-	public BigDecimal getUnitValue() {
-		return unitValue;
+	public BigDecimal getPrice() {
+		return price;
 	}
 	
-	public void setUnitValue(BigDecimal unitValue) {
-		this.unitValue = unitValue;
+	public void setPrice(BigDecimal price) {
+		this.price = price;
 	}
 
-	public Date getUpdatedAt() {
+	public LocalDateTime getUpdatedAt() {
 		return updatedAt;
 	}
 
-	public void setUpdatedAt(Date updatedAt) {
+	public void setUpdatedAt(LocalDateTime updatedAt) {
 		this.updatedAt = updatedAt;
 	}
 
-	public Date getCreatedAt() {
+	public LocalDateTime getCreatedAt() {
 		return createdAt;
 	}
 
@@ -84,6 +100,14 @@ public class ProductModel{
 
 	public void setIsActive(Boolean isActive) {
 		this.isActive = isActive;
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
 	
 	

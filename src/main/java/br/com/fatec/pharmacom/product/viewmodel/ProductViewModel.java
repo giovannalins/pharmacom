@@ -3,18 +3,19 @@ package br.com.fatec.pharmacom.product.viewmodel;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
-
 import br.com.fatec.pharmacom.product.dto.ProductNewDto;
 import br.com.fatec.pharmacom.product.dto.ProductUpdateDto;
 import br.com.fatec.pharmacom.product.model.ProductModel;
 import br.com.fatec.pharmacom.product.service.ProductService;
+import javafx.collections.ObservableList;
 
 public class ProductViewModel {
 
 	private final ProductService service;
+	
 
-	public ProductViewModel(ProductService service) {
-		this.service = service;
+	public ProductViewModel() {
+		this.service = new ProductService();
 	}
 
 	public void createProduct(String name, String description, BigDecimal unitValue, Boolean isActive) {
@@ -34,9 +35,15 @@ public class ProductViewModel {
 	public void activateProduct(UUID id) {
 		this.service.activateProduct(id);
 	}
+	
+	public List<ProductModel> paginateProducts(int page, int size){
+		System.out.println(page);
+		System.out.println(size);
+		return this.service.paginateProducts(page, size);
+	}
 
-	public List<ProductModel> listProducts() {
-		return this.service.listProducts();
+	public ObservableList<ProductModel> loadAllProducts() {
+		return this.service.loadAllProducts();
 	}
 
 	public ProductModel findProductByName(String name) {
@@ -45,5 +52,10 @@ public class ProductViewModel {
 
 	public ProductModel findProductById(UUID id) {
 		return this.service.findById(id);
+	}
+
+	public int getTotalPageProducts(int itemsPerPage) {
+		return this.service.getTotalPageProducts(itemsPerPage);
+
 	}
 }

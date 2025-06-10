@@ -78,7 +78,7 @@
 	  	<Button 
 	  		text="Salvar Fornecedor" 
 		  	styleClass="btn-router-selector"
-			fx:id="btnSave"  onAction="#saveSupplier"
+			fx:id="btnSave"  onAction="#updatedSupplier"
          />
 	  </VBox>
 	  <Region HBox.hgrow="ALWAYS"/>

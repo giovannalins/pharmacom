@@ -9,10 +9,12 @@
 	spacing="10" 
 	alignment="CENTER_LEFT" 
 	xmlns="http://javafx.com/javafx/17"
+    xmlns:fx="http://javafx.com/fxml"
 >
-    <ImageView fitHeight="50" fitWidth="50" />
-    <VBox spacing="5">
-        <Label style="-fx-font-weight: bold;"/>
-        <Label wrapText="true"/>
+    <ImageView fx:id="productImage" fitHeight="80" fitWidth="80" />
+    <VBox spacing="15">
+        <Label fx:id="productName"  style="-fx-font-weight: bold;"/>
+        <Label fx:id="productDescription" wrapText="true"/>
+        <Label fx:id="productPrice" wrapText="true"/>
     </VBox>
 </HBox>
